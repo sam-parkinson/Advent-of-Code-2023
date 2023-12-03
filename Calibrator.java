@@ -68,7 +68,7 @@ public class Calibrator {
 
     private int findTrueCalibrationSum() {
         int result = 0;
-    for (int i = 0; i < calibrations.size(); i++) {
+        for (int i = 0; i < calibrations.size(); i++) {
             result += findTrueCalibrationValue(calibrations.get(i));
         }
         return result;
