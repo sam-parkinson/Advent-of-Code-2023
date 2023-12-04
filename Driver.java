@@ -3,6 +3,7 @@ public class Driver {
         Calibrator calibrator = new Calibrator("inputs/day1.txt");
         CubeDrawing cubeDrawing = new CubeDrawing("inputs/day2.txt");
         EngineSchematic engineSchematic = new EngineSchematic("inputs/day3.txt");
+        LottoChecker lottoChecker = new LottoChecker("inputs/day4.txt");
 
         System.out.println("Advent of Code 2023");
 
@@ -17,5 +18,9 @@ public class Driver {
         System.out.println();
         System.out.println("Problem 3.1: " + engineSchematic.getPartNumberSum());
         System.out.println("Problem 3.2: " + engineSchematic.getGearRatio());
+
+        System.out.println();
+        System.out.println("Problem 4.1: " + lottoChecker.getPointSum());
+        System.out.println("Problem 4.2: " + lottoChecker.getTicketCount());
     }
 }
