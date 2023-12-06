@@ -4,6 +4,7 @@ public class Driver {
         CubeDrawing cubeDrawing = new CubeDrawing("inputs/day2.txt");
         EngineSchematic engineSchematic = new EngineSchematic("inputs/day3.txt");
         LottoChecker lottoChecker = new LottoChecker("inputs/day4.txt");
+        FarmersAlmanac farmersAlmanac = new FarmersAlmanac("inputs/test.txt");
 
         System.out.println("Advent of Code 2023");
 
@@ -22,5 +23,9 @@ public class Driver {
         System.out.println();
         System.out.println("Problem 4.1: " + lottoChecker.getPointSum());
         System.out.println("Problem 4.2: " + lottoChecker.getTicketCount());
+
+        System.out.println();
+        System.out.println("Problem 5.1: " + farmersAlmanac.getMinLocation());
+        System.out.println("Problem 5.2: " + farmersAlmanac.getTrueMinLocation());
     }
 }
