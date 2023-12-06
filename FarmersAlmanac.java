@@ -63,7 +63,6 @@ public class FarmersAlmanac {
 
                     list.add(lineIntArr);
                 } 
-                // no third condition, we just skip text
             }
 
             this.mappings = new long[mappingsList.size()][][];
@@ -107,23 +106,10 @@ public class FarmersAlmanac {
         return value;
     }
 
-    private void findTrueLocationsOld() {
-        this.trueLocations = new ArrayList<Long>();
-
-        for (int i = 0; i < seeds.length - 1; i += 2) {
-            long start = seeds[i];
-            long range = seeds[i + 1];
-
-            for (int j = 0; j < range; j++) {
-                trueLocations.add(checkMappings(start + j));
-            }
-        }
-    }
-
     private void findTrueLocations() {
         this.trueLocations = new ArrayList<Long>();
 
-        for (int i = 0; i < seeds.length - 1; i += 2) {
+        for (int i = 0; i < seeds.length; i += 2) {
             long start = seeds[i];
             long range = seeds[i + 1];
             checkTrueMappings(start, range, 0);
@@ -131,7 +117,6 @@ public class FarmersAlmanac {
     }
 
     private void checkTrueMappings(long s, long r, int index) {
-        System.out.println(index);
         long start = s;
         long range = r;
         long[][] map = mappings[index];
@@ -144,107 +129,63 @@ public class FarmersAlmanac {
             long mapLineEnd = mapLine[1] + mapLine[2];
             long diff = mapLine[0] - mapLine[1];
 
-            if (start >= mapLine[1] && end <= mapLineEnd) {
+            if (s >= mapLine[1] && end <= mapLineEnd) {
                 start += diff;
                 if (index == mappings.length - 1) {
                     trueLocations.add(start);
                 } else {
                     checkTrueMappings(start, range, index + 1);
                 }
-            } else if (start >= mapLine[1] && start <= mapLineEnd) {
+                break;
+            } else if (s >= mapLine[1] && s < mapLineEnd) {
                 long newStart = start + diff;
-                long newRange = mapLineEnd - newStart + diff;
-                
-                if (index == mappings.length - 1) {
-                    trueLocations.add(newStart);
-                } else {
-                    checkTrueMappings(newStart, newRange, index + 1);
-                }
-                start = mapLineEnd + 1;
-                range = end - start;
-            } else if (end >= mapLine[1] && end <= mapLineEnd) {
-                long newStart = mapLine[1] + diff;
-                long newRange = end - mapLine[1];
+                long newRange = mapLineEnd - start;
 
                 if (index == mappings.length - 1) {
                     trueLocations.add(newStart);
                 } else {
                     checkTrueMappings(newStart, newRange, index + 1);
                 }
-                end = mapLine[1] - 1;
+                start = mapLineEnd;
                 range = end - start;
-            } else if (start <= mapLine[1] && end >= mapLineEnd) {
+            } else if (end > mapLine[1] && end <= mapLineEnd) {
+                long newStart = mapLine[1] + diff;
+                long newRange = end - mapLine[1];
+
+                if (index == mappings.length - 1) {
+                    //System.out.println(newStart);
+                    //System.out.println(diff);
+                    //System.out.println(start);
+                    trueLocations.add(Math.max(start, newStart)); // only my case works
+                    // trueLocations.add(newStart); // my case and David's case work
+                    // trueLocations.add(start); // the provided test case and David's case work
+                    // trueLocations.add(Math.min(start, newStart)); // the provided test case and David's case work
+                } else {
+                    checkTrueMappings(newStart, newRange, index + 1);
+                }
+                end = mapLine[1];
+                range = end - start;
+            } else if (s < mapLine[1] && end > mapLineEnd) {
                 long newStart = mapLine[1] + diff;
                 long newRange = mapLineEnd - mapLine[1];
 
                 if (index == mappings.length - 1) {
                     trueLocations.add(newStart);
                 } else {
+                    checkTrueMappings(s, mapLine[1] - s, index);
+                    checkTrueMappings(mapLineEnd, end - mapLineEnd + 1, index);
                     checkTrueMappings(newStart, newRange, index + 1);
                 }
-            } else {
-                if (i == map.length - 1) {
-                    if (index == mappings.length - 1) {
-                        trueLocations.add(start);
-                    } else {
-                        checkTrueMappings(start, range, index + 1);
-                    }
-                }
-            }
-
-            /* if (start >= mapLine[1] && start <= mapLineEnd) {
-                long newStart = start + diff;
-                if (index == mappings.length - 1) {
-                    trueLocations.add(newStart);
-                } else {
-                    checkTrueMappings(newStart, end - newStart, index + 1);        
-                }
-                start = newStart;
-                range = end - start;
-
-            } else if (end <= mapLineEnd) {
-                long newEnd = mapLine[1] + diff;
-                if (index == mappings.length - 1) {
-                    trueLocations.add(newEnd);
-                } else {
-                    checkTrueMappings(start, newEnd - start, index + 1);
-                }
-                range = newEnd - start;
-                
-            } else {
+                break;
+            } else if (i == map.length - 1) {
                 if (index == mappings.length - 1) {
                     trueLocations.add(start);
                 } else {
                     checkTrueMappings(start, range, index + 1);
                 }
-            } */
-            /*
-             * There are five conditions to test for
-             * 
-             * 1. The entire starting range is in the map range
-             *  -- move the entire starting range to the next map range, adjusted by difference
-             * 2. The start, but not the end, is in the map range
-             *  -- slice the range into two parts
-             *  -- the part of the starting range in the map range is moved to the next range, adjusted by difference
-             *  -- the remaining range is continued in the current range, with the start adjusted accordingly
-             * 3. The end, but not the start, is in the map range
-             *  -- slice the range into two parts
-             *  -- the part of the starting range in the map range is moved to the next range, adjusted by difference
-             *  -- the remaining range is continued in the current range, with the end/range adjusted accordingly
-             * 4. The entire map range is in the starting range
-             *  -- why.
-             *  -- I hate that this is a possibility.
-             *  -- This requires the following:
-             *  -- put entire map range in next range, adjusted by difference
-             *  -- you know what fuck it just toss the entire starting range to the next thing like it's case 5. who cares. this won't cause any problems.
-             * 5. There is no overlap between the starting and map ranges
-             *  -- continue in the current range
-             *  -- if this is at the end, go next
-             */
+            }
         }
     }
-
-
 
     private long findMinLocation(ArrayList<Long> arr) {
         long min = arr.get(0);

@@ -4,7 +4,7 @@ public class Driver {
         CubeDrawing cubeDrawing = new CubeDrawing("inputs/day2.txt");
         EngineSchematic engineSchematic = new EngineSchematic("inputs/day3.txt");
         LottoChecker lottoChecker = new LottoChecker("inputs/day4.txt");
-        FarmersAlmanac farmersAlmanac = new FarmersAlmanac("inputs/test.txt");
+        FarmersAlmanac farmersAlmanac = new FarmersAlmanac("inputs/day5.txt");
 
         System.out.println("Advent of Code 2023");
 
