@@ -5,6 +5,7 @@ public class Driver {
         EngineSchematic engineSchematic = new EngineSchematic("inputs/day3.txt");
         LottoChecker lottoChecker = new LottoChecker("inputs/day4.txt");
         FarmersAlmanac farmersAlmanac = new FarmersAlmanac("inputs/day5.txt");
+        BoatRace boatRace = new BoatRace("inputs/day6.txt");
 
         System.out.println("Advent of Code 2023");
 
@@ -27,5 +28,9 @@ public class Driver {
         System.out.println();
         System.out.println("Problem 5.1: " + farmersAlmanac.getMinLocation());
         System.out.println("Problem 5.2: " + farmersAlmanac.getTrueMinLocation());
+
+        System.out.println();
+        System.out.println("Problem 6.1: " + boatRace.getPossibleRecords());
+        System.out.println("Problem 6.2: " + boatRace.getRealRecord());
     }
 }

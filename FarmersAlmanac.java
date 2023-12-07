@@ -156,8 +156,8 @@ public class FarmersAlmanac {
                     //System.out.println(newStart);
                     //System.out.println(diff);
                     //System.out.println(start);
-                    trueLocations.add(Math.max(start, newStart)); // only my case works
-                    // trueLocations.add(newStart); // my case and David's case work
+                    // trueLocations.add(Math.max(start, newStart)); // only my case works
+                    trueLocations.add(newStart); // my case and David's case work
                     // trueLocations.add(start); // the provided test case and David's case work
                     // trueLocations.add(Math.min(start, newStart)); // the provided test case and David's case work
                 } else {
