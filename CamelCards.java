@@ -116,7 +116,7 @@ public class CamelCards {
             this.bet = Integer.parseInt(arr[1]);
             makeHandArr();
             makeCountArr();
-            findValue();    // TODO: fix
+            findValue();
         }
 
         @Override
@@ -148,24 +148,69 @@ public class CamelCards {
                 }
             }
         }
+
+        @Override
+        protected void findValue() {
+            int countTwos = 0;
+            int countJokers = countArr[1];
+            int max = 0;
+
+            for (int count : countArr) {
+                max = Math.max(max, count);
+                if (count == 2)
+                    countTwos++;
+            }
+
+            switch (max) {
+                case 5:
+                    this.value = 7;
+                    break;
+                case 4: 
+                    this.value = countJokers > 0 ? 7 : 6; // 7 if joker, else 6
+                    break;
+                case 3:
+                    if (countJokers == 3)
+                        this.value = 6 + countTwos; // either 6 or 7
+                    else
+                        this.value = countJokers > 0 ? 5 + countJokers : 4 + countTwos; // either 7, 6 or 5
+                    break;
+                case 2:
+                    if (countTwos == 2 && countJokers > 0)
+                        this.value = 4 + countJokers;
+                    else
+                        this.value = countJokers > 0 ? 4 : countTwos + 1 + countJokers;
+                    break;
+                default:
+                    this.value = 1 + countJokers;
+                    break;
+            }
+        }
     }
 
     private ArrayList<PokerHand> pokerHands;
-    private ArrayList<JokerHand> jokerHands;
+    private ArrayList<PokerHand> jokerHands;
     private int totalPokerWinnings;
+    private int totalJokerWinnings;
 
     public CamelCards(String address) {
         parseInput(address);
         Collections.sort(pokerHands);
+        Collections.sort(jokerHands);
         totalPokerWinnings = findTotalWinnings(this.pokerHands);
+        totalJokerWinnings = findTotalWinnings(this.jokerHands);
     }
 
     public int getTotalPokerWinnings() {
         return this.totalPokerWinnings;
     }
 
+    public int getTotalJokerWinnings() {
+        return this.totalJokerWinnings;
+    }
+
     private void parseInput(String address) {
         this.pokerHands = new ArrayList<PokerHand>();
+        this.jokerHands = new ArrayList<PokerHand>();
         
         try {
             File file = new File(address);
@@ -195,59 +240,11 @@ public class CamelCards {
 }
 
 /*
- * Data structure
- * 
- * Array of PokerHands
- * 
- * PokerHands contain a hand string, a hand array, a count array, a value, and a bet
- * Do they need all of this shit?
- * I have no idea but it could be useful in part 2
- * 
- * VALUE enum type?
- * 
- * Sorting algorithm for hands
- * 
- * Go through input string
- * 
- * For each line, create PokerHand
- * 
- * Convert hand string into hand array -- this is puzzle 0
- * 
- *  A  K  Q  J 10 9 8 7 6 5 4 3 2
- * 14 13 12 11 10 9 8 7 6 5 4 3 2
- *  
- * Calculate value! -- this is puzzle 1, hardest
- * 
- * So, we have the hand
- * Do we make a hash map for each hand? Or is there a cheeky way to do this?
- * I think an array of length 15 is better for dealing with this
- *  Yes, do this
- * 
- * This array tells us nicely what the hand value is
- * 
- * -- max value of array == 5 -- 5 of a kind
- * -- max value of array == 4 -- 4 of a kind
- * -- max value of array == 3
- *      -- contains 2 ? full house : 3 of a kind
- * -- max value of array == 2
- *      -- contains other 2 ? two pair : pair
- * default -- high card
- * 
- * 
- * 1 - high card
- * 2 - pair
- * 3 - two pair
- * 4 - three of a kind
- * 5 - full house
- * 6 - four of a kind
- * 7 - five of a kind
- * 
- * Sorting algorithm -- this is puzzle 2
- * 
- * put worst hands at start of array
- * comparator -- first, put lower of two values, next, put lower first card (use array!)
- * 
- * Calculate winnings sum -- this is puzzle 3, easiest
- * for (int i = 0; i < hands.length; i++)
- *    result += hands[i].bet * (i + 1);
+ * 7 == 5 of a kind
+ * 6 == 4 of a kind
+ * 5 == full house
+ * 4 == 3 of a kind
+ * 3 == two pair
+ * 2 == pair
+ * 1 == high card
  */

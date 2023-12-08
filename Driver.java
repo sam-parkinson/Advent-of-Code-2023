@@ -36,6 +36,6 @@ public class Driver {
 
         System.out.println();
         System.out.println("Problem 7.1: " + camelCards.getTotalPokerWinnings());
-        System.out.println("Problem 7.2: " );
+        System.out.println("Problem 7.2: " + camelCards.getTotalJokerWinnings());
     }
 }
