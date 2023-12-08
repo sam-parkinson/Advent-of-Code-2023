@@ -7,6 +7,7 @@ public class Driver {
         FarmersAlmanac farmersAlmanac = new FarmersAlmanac("inputs/day5.txt");
         BoatRace boatRace = new BoatRace("inputs/day6.txt");
         CamelCards camelCards = new CamelCards("inputs/day7.txt");
+        DesertMap desertMap = new DesertMap("inputs/day8.txt");
 
         System.out.println("Advent of Code 2023");
 
@@ -37,5 +38,9 @@ public class Driver {
         System.out.println();
         System.out.println("Problem 7.1: " + camelCards.getTotalPokerWinnings());
         System.out.println("Problem 7.2: " + camelCards.getTotalJokerWinnings());
+
+        System.out.println();
+        System.out.println("Problem 8.1: " + desertMap.getMoveCount());
+        System.out.println("Problem 8.2: " + desertMap.getTrueMoveCount());
     }
 }
