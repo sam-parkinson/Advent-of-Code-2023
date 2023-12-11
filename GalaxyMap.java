@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GalaxyMap {
@@ -12,10 +13,9 @@ public class GalaxyMap {
     long millionMinimumDistances;
 
     public GalaxyMap(String address) {
-        parseInput(address);
-        findEmptyRows();
-        findEmptyColumns();
+        parseInput(address);      
         findGalaxyIndices();
+        findEmptyRows();
         findMinimumDistances();
     }
 
@@ -50,36 +50,18 @@ public class GalaxyMap {
 
     private void findEmptyRows() {
         this.emptyRows = new int[galaxyMap.length];
-        for (int i = 0; i < galaxyMap.length; i++) {
-            boolean rowEmpty = true;
-            for (int j = 0; j < galaxyMap[i].length; j++) {
-                if (galaxyMap[i][j] == '#') {
-                    rowEmpty = false;
-                    break;
-                }
-            }
-            if (rowEmpty) {
-                emptyRows[i]++;
-            }
+        this.emptyColumns = new int[galaxyMap[0].length];
+        
+        Arrays.fill(emptyRows, 1);
+        Arrays.fill(emptyColumns, 1);
+
+        for (Integer[] galaxy : galaxyIndices) {
+            emptyRows[galaxy[0]] = 0;
+            emptyColumns[galaxy[1]] = 0;
         }
+
         for (int i = 1; i < emptyRows.length; i++) {
             emptyRows[i] += emptyRows[i - 1];
-        }
-    }
-
-    private void findEmptyColumns() {
-        this.emptyColumns = new int[galaxyMap[0].length];
-        for (int i = 0; i < galaxyMap[0].length; i++) {
-            boolean columnEmpty = true;
-            for (int j = 0; j < galaxyMap.length; j++) {
-                if (galaxyMap[j][i] == '#') {
-                    columnEmpty = false;
-                    break;
-                }
-            }
-            if (columnEmpty) {
-                emptyColumns[i]++;
-            }
         }
         for (int i = 1; i < emptyColumns.length; i++) {
             emptyColumns[i] += emptyColumns[i - 1];
