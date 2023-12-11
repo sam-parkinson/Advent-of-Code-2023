@@ -9,6 +9,7 @@ public class Driver {
         CamelCards camelCards = new CamelCards("inputs/day7.txt");
         DesertMap desertMap = new DesertMap("inputs/day8.txt");
         OasisInspector oasisInspector = new OasisInspector("inputs/day9.txt");
+        PipeMaze pipeMaze = new PipeMaze("inputs/day10.txt");
 
         System.out.println("Advent of Code 2023");
 
@@ -47,5 +48,9 @@ public class Driver {
         System.out.println();
         System.out.println("Problem 9.1: " + oasisInspector.getLastHistories());
         System.out.println("Problem 9.2: " + oasisInspector.getFirstHistories());
+
+        System.out.println();
+        System.out.println("Problem 10.1: " + pipeMaze.getMaxSteps());
+        System.out.println("Problem 10.2: " + pipeMaze.getInsideCount());
     }
 }
