@@ -10,6 +10,7 @@ public class Driver {
         DesertMap desertMap = new DesertMap("inputs/day8.txt");
         OasisInspector oasisInspector = new OasisInspector("inputs/day9.txt");
         PipeMaze pipeMaze = new PipeMaze("inputs/day10.txt");
+        GalaxyMap galaxyMap = new GalaxyMap("inputs/day11.txt");
 
         System.out.println("Advent of Code 2023");
 
@@ -52,5 +53,9 @@ public class Driver {
         System.out.println();
         System.out.println("Problem 10.1: " + pipeMaze.getMaxSteps());
         System.out.println("Problem 10.2: " + pipeMaze.getInsideCount());
+
+        System.out.println();
+        System.out.println("Problem 11.1: " + galaxyMap.getMinimumDistances());
+        System.out.println("Problem 11.2: " + galaxyMap.getMillionMinimumDistances());
     }
 }
