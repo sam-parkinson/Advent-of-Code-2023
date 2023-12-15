@@ -12,6 +12,7 @@ public class Driver {
         PipeMaze pipeMaze = new PipeMaze("inputs/day10.txt");
         GalaxyMap galaxyMap = new GalaxyMap("inputs/day11.txt");
         // SpringChecker springChecker = new SpringChecker("inputs/day12.txt");
+        MirrorFinder mirrorFinder = new MirrorFinder("inputs/test.txt");
 
         LavaHasher lavaHasher = new LavaHasher("inputs/day15.txt");
 
@@ -64,6 +65,9 @@ public class Driver {
         // System.out.println();
         // System.out.println("Problem 12.1: " + springChecker.getTotalPossiblePositions());
         // System.out.println("Problem 12.2: " + springChecker.getTotalLongPositions());
+
+        System.out.println();
+        System.out.println("Problem 13.1: " + mirrorFinder.getReflectionSummary());
 
         System.out.println();
         System.out.println("Problem 15.1: " + lavaHasher.getHashedSum());
