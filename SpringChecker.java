@@ -31,7 +31,7 @@ public class SpringChecker {
             findLongCount();
 
             this.possiblePositions = findPossiblePositions(this.record, this.count);
-            this.possibleLongPositions = findPossiblePositions(this.longRecord, this.longCount);
+            // this.possibleLongPositions = findPossiblePositions(this.longRecord, this.longCount);
         }
 
         protected void findLongRecord() {

@@ -11,7 +11,9 @@ public class Driver {
         OasisInspector oasisInspector = new OasisInspector("inputs/day9.txt");
         PipeMaze pipeMaze = new PipeMaze("inputs/day10.txt");
         GalaxyMap galaxyMap = new GalaxyMap("inputs/day11.txt");
-        SpringChecker springChecker = new SpringChecker("inputs/test.txt");
+        // SpringChecker springChecker = new SpringChecker("inputs/day12.txt");
+
+        LavaHasher lavaHasher = new LavaHasher("inputs/day15.txt");
 
         System.out.println("Advent of Code 2023");
 
@@ -59,8 +61,12 @@ public class Driver {
         System.out.println("Problem 11.1: " + galaxyMap.getMinimumDistances());
         System.out.println("Problem 11.2: " + galaxyMap.getMillionMinimumDistances());
 
+        // System.out.println();
+        // System.out.println("Problem 12.1: " + springChecker.getTotalPossiblePositions());
+        // System.out.println("Problem 12.2: " + springChecker.getTotalLongPositions());
+
         System.out.println();
-        System.out.println("Problem 12.1: " + springChecker.getTotalPossiblePositions());
-        System.out.println("Problem 12.2: " + springChecker.getTotalLongPositions());
+        System.out.println("Problem 15.1: " + lavaHasher.getHashedSum());
+        System.out.println("Problem 15.2: " + lavaHasher.getFocalLengthSum());
     }
 }
