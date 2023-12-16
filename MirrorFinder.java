@@ -92,7 +92,6 @@ public class MirrorFinder {
         int sum = 0;
 
         for (int i = 0; i < mirrorCount.length; i++) {
-            System.out.println("Testing: " + i);
             sum += findReflection(mirrorCount[i]);
         }
 
@@ -115,28 +114,22 @@ public class MirrorFinder {
                     stack.pop();
                 } else {
                     if (midpointFound) {
+                        stack.clear();
+                        for (int k = 0; k < j - 1; k++)
+                            stack.push(mirror[i][k]);
                         midpoint = -1;
                         midpointFound = false;
+                        j--;
                     }   
                     stack.push(mirror[i][j]);
                 }
                 j++;
             }
 
-            System.out.println(midpointFound);
-
-            if (midpointFound && midpoint > -1)
-                return i == 1 ? midpoint : midpoint * 100;
-            
+            if (midpointFound && midpoint > 0)
+                return i == 1 ? midpoint : midpoint * 100;            
         }
 
         return 0;
     }
 }
-
-// 21275 -- too low
-// 27390 -- too low
-
-// missing: 15, 63
-
-// look at: test line 29

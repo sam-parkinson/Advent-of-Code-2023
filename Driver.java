@@ -12,7 +12,7 @@ public class Driver {
         PipeMaze pipeMaze = new PipeMaze("inputs/day10.txt");
         GalaxyMap galaxyMap = new GalaxyMap("inputs/day11.txt");
         // SpringChecker springChecker = new SpringChecker("inputs/day12.txt");
-        MirrorFinder mirrorFinder = new MirrorFinder("inputs/test.txt");
+        MirrorFinder mirrorFinder = new MirrorFinder("inputs/day13.txt");
 
         LavaHasher lavaHasher = new LavaHasher("inputs/day15.txt");
 
