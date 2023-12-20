@@ -16,6 +16,11 @@ public class Driver {
 
         LavaHasher lavaHasher = new LavaHasher("inputs/day15.txt");
 
+
+
+
+        PartSorter partSorter = new PartSorter("inputs/day19.txt");
+
         System.out.println("Advent of Code 2023");
 
         System.out.println();
@@ -72,5 +77,8 @@ public class Driver {
         System.out.println();
         System.out.println("Problem 15.1: " + lavaHasher.getHashedSum());
         System.out.println("Problem 15.2: " + lavaHasher.getFocalLengthSum());
+
+        System.out.println();
+        System.out.println("Problem 19.1: " + partSorter.getRatingSum());
     }
 }
